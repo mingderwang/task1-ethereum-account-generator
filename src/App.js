@@ -1,15 +1,23 @@
+// App.js
+
 import React, { useState } from 'react';
-import { ethers } from 'ethers';
+import esInstance from './EtherspotInitializer'; // Import EtherspotInitializer
+
+
 
 function App() {
   const [account, setAccount] = useState(null);
 
-  const createNewAccount = () => {
-    const wallet = ethers.Wallet.createRandom();
-    setAccount({
-      address: wallet.address,
-      privateKey: wallet.privateKey
-    });
+  const createNewAccount = async () => {
+    try {
+      const wallet = await esInstance.createWallet();
+      setAccount({
+        address: wallet.address,
+        privateKey: wallet.privateKey
+      });
+    } catch (error) {
+      console.error('Error creating user:', error);
+    }
   }
 
   return (
