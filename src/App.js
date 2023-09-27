@@ -1,9 +1,6 @@
-// App.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import esInstance from './EtherspotInitializer'; // Import EtherspotInitializer
-
-
+import abstractAddress from './EtherspotInitializer'; // Import abstractAddress
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -19,6 +16,15 @@ function App() {
       console.error('Error creating user:', error);
     }
   }
+
+  useEffect(() => {
+    const fetchAbstractAddress = async () => {
+      const address = await abstractAddress;
+      console.log('Abstract Address:', address);
+    }
+
+    fetchAbstractAddress();
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">

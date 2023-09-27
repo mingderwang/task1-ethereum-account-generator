@@ -1,6 +1,10 @@
-import { createInstance } from 'etherspot';
+import { PrimeSdk } from '@etherspot/prime-sdk';
 
-const apiKey = '5ed781ac78a84836959a513fd00c626d'; // Replace with your Etherspot API key
-const esInstance = createInstance({ apiKey });
+const primeSdk = new PrimeSdk(
+  { privateKey: process.env.WALLET_PRIVATE_KEY },
+  { chainId: 4337, projectKey: '' }
+);
 
-export default esInstance;
+const abstractAddress = await primeSdk.getCounterFactualAddress();
+
+export default abstractAddress;
